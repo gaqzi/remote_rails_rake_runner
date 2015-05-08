@@ -55,6 +55,13 @@ module RemoteRailsRakeRunner
           json = JSON.parse(response.body)
           expect(json['output']).to eq("Hello Andersson and Björn!\n")
         end
+
+        it 'runs successfully with default argument when args is empty' do
+          post :run, format: :json, task: 'simple:hello_default', args: ''
+
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Hello Unknown person!\n")
+        end
       end
     end
   end

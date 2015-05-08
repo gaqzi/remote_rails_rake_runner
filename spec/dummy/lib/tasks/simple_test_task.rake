@@ -18,4 +18,12 @@ namespace :simple do
   task :exceptional do |t, args|
     raise 'Whaaaaaaaa'
   end
+
+  task :hello_default, [:name] do |t, args|
+    args.with_defaults(
+            name: 'Unknown person'
+    )
+
+    puts "Hello #{args.name}!"
+  end
 end
