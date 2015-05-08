@@ -44,7 +44,7 @@ module RemoteRailsRakeRunner
       return if defined? Rake
 
       require 'rake'
-      load Rails.application.config.remote_rake_runner_rakefile_path || Rails.root.join('Rakefile').to_s
+      load Rails.application.config.try(:remote_rake_runner_rakefile_path) || Rails.root.join('Rakefile').to_s
     end
   end
 end
