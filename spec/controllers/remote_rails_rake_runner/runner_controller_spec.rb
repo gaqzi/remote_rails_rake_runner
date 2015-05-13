@@ -24,6 +24,18 @@ module RemoteRailsRakeRunner
         end
       end
 
+      context 're-enabling tasks' do
+        it 're-enables all tasks' do
+          post :run, format: :json, task: 'simple:hello_world'
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Hello World!\n")
+
+          post :run, format: :json, task: 'simple:hello_world'
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Hello World!\n")
+        end
+      end
+
       context 'task without arguments' do
         it 'runs successfully' do
           post :run, format: :json, task: 'simple:hello_world'

@@ -18,7 +18,8 @@ module RemoteRailsRakeRunner
 
     def run
       success = true
-      task = Rake.application.tasks.find { |t| t.name == params[:task] }
+      rake_tasks = Rake.application.tasks
+      task = rake_tasks.find { |t| t.name == params[:task] }
       return head :not_found unless task
 
       begin
@@ -26,6 +27,8 @@ module RemoteRailsRakeRunner
       rescue => e
         success = false
         output = e.inspect
+      ensure
+        rake_tasks.each {|task| task.reenable}
       end
 
       render json: {success: success, output: output}
