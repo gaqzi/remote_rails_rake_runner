@@ -75,6 +75,36 @@ module RemoteRailsRakeRunner
           expect(json['output']).to eq("Hello Unknown person!\n")
         end
       end
+
+      context 'setting a one-off environment variable' do
+        it 'task without arguments runs successfully' do
+          post :run, format: :json, task: 'simple:hello_environment', environment: {name: 'World'}
+
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Hello World!\n")
+        end
+
+        it 'task with arguments' do
+          post :run, format: :json, task: 'simple:hello_environment', environment: {name: 'World'}, args: 'Ehlo'
+
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Ehlo World!\n")
+        end
+
+        it 'resets the env to the old state' do
+          old_env = ENV.to_h
+          post :run, format: :json, task: 'simple:hello_environment', environment: {name: 'World'}
+
+          expect(ENV.to_h).to eq(old_env)
+        end
+
+        it 'works when overridden environment variable is empty' do
+          post :run, format: :json, task: 'simple:hello_environment', environment: ''
+
+          json = JSON.parse(response.body)
+          expect(json['output']).to eq("Hello !\n")
+        end
+      end
     end
   end
 end

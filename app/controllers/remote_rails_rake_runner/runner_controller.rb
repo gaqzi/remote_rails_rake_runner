@@ -23,7 +23,9 @@ module RemoteRailsRakeRunner
       return head :not_found unless task
 
       begin
-        output = capture_stdout { task.invoke(*(params[:args] || '').split(',')) }
+        output = capture_stdout do
+          override_env(params[:environment]) { task.invoke(*(params[:args] || '').split(',')) }
+        end
       rescue => e
         success = false
         output = e.inspect
@@ -41,6 +43,20 @@ module RemoteRailsRakeRunner
       $stdout.string
     ensure
       $stdout = previous
+    end
+
+    def override_env(variables)
+      unless variables.blank?
+        begin
+          previous = ENV.to_h
+          ENV.update(variables)
+          yield
+        ensure
+          ENV.replace(previous)
+        end
+      else
+        yield
+      end
     end
 
     def load_rake

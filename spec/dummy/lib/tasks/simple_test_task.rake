@@ -26,4 +26,12 @@ namespace :simple do
 
     puts "Hello #{args.name}!"
   end
+
+  desc 'Output dependent on an environment variable'
+  task :hello_environment, [:greeting] do |t, args|
+    args.with_defaults(
+            greeting: 'Hello'
+    )
+    puts "#{args.greeting} #{ENV['name']}!"
+  end
 end
