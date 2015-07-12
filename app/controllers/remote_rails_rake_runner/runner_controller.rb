@@ -28,7 +28,7 @@ module RemoteRailsRakeRunner
         success = false
         output = e.inspect
       ensure
-        rake_tasks.each {|task| task.reenable}
+        rake_tasks.each { |task| task.reenable }
       end
 
       render json: {success: success, output: output}
