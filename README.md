@@ -35,13 +35,18 @@ end
 ## Configuration
 
 You can specify the path to your `Rakefile` by setting the option
-`Rails.application.config.remote_rake_runner_rakefile_path` which defaults to `Rails.root.join('Rakefile').to_s`.
+`Rails.application.config.remote_rake_runner_rakefile_path` which defaults to
+`Rails.root.join('Rakefile').to_s`.
 
 ## Usage
 
-The app exposes two endpoints, a listing of all the rake tasks and the actual runner.
-To run a task with arguments just put the arguments in into the argument `args` separated by commas.
-The task will not be considered successful if it raises an exception, otherwise it's assumed to have been successful.
+The app exposes two endpoints, a listing of all the rake tasks and the actual
+runner. To run a task with arguments just put the arguments in into the argument
+`args` separated by commas. The task will not be considered successful if it
+raises an exception, otherwise it's assumed to have been successful.
+
+To override an environment variable for one task run set the variable in the
+`environment` variable which acts like a hash.
 
 If you mount the app under `/rake` as suggested above:
 
@@ -51,7 +56,18 @@ $ curl http://localhost:3000/rake
 
 $ curl http://localhost:3000/rake/simple:hello -d args=Björn
 {"success":true,"output":"Hello Björn!\n"}
+
+$ curl http://localhost:3000/rake/simple:hello_environment -d 'environment[name]=Björn&args=Ahlo'
+{"success":true,"output":"Ahlo Björn!\n"}
 ```
+
+## Arguments
+
+* `args`: A comma separated list string of arguments passed to the rake task,
+  like on the command line
+* `environment`: A hash of overridden values.  
+  Example in Ruby: `{environment: {name: 'Björn'}}` or in curl
+  `environment[name]=Björn`.
 
 ## Acknowledgements
 
