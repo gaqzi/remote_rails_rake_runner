@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in remote_rails_rake_runner.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -14,6 +14,7 @@ gemspec
 # gem 'debugger'
 
 group :development, :test do
+  gem 'coveralls', require: false
   gem 'rspec-rails'
   gem 'pry'
   gem 'pry-remote'

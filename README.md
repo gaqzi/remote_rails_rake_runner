@@ -3,6 +3,10 @@
 The goal to deal with one problem: The startup time of a big Rails
 project when running a functional suite across multiple servers.
 
+[![Circle CI](https://circleci.com/gh/gaqzi/remote_rails_rake_runner/tree/master.svg?style=svg)](https://circleci.com/gh/gaqzi/remote_rails_rake_runner/tree/master)
+[![Coverage Status](https://coveralls.io/repos/gaqzi/remote_rails_rake_runner/badge.svg?branch=master&service=github)](https://coveralls.io/github/gaqzi/remote_rails_rake_runner?branch=master)
+[![Gem Version](https://badge.fury.io/rb/remote_rails_rake_runner.svg)](http://badge.fury.io/rb/remote_rails_rake_runner)
+
 ## Background
 The project this lil' app was started on is running a Cucumber suite
 that spans a total of 10 concurrent runners, all of whom need data at
