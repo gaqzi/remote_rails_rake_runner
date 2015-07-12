@@ -16,7 +16,8 @@ dependencies:
         - '../.rvm/rubies'
 test:
   override:
-    - >
+    - parallel: true
+      >
       case $CIRCLE_NODE_INDEX in
       0)
         rvm-exec 2.0.0-p645 bundle exec rspec
@@ -27,8 +28,7 @@ test:
       2)
         rvm-exec 2.2.2 bundle exec rspec
         ;;
-      esac:
-      parallel: true
+      esac
 notify:
   webhooks:
     - url: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
