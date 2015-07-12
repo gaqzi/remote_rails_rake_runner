@@ -12,6 +12,20 @@ dependencies:
         rvm-exec 2.2.2 bash -c "bundle install"
         ;;
       esac
+database:
+  override:
+    - >
+      case $CIRCLE_NODE_INDEX in
+      0)
+        rvm-exec 2.0.0-p645 bash -c "bundle exec rake db:create --trace"
+        ;;
+      1)
+        rvm-exec 2.1.6 bash -c "bundle exec rake db:create --trace"
+        ;;
+      2)
+        rvm-exec 2.2.2 bash -c "bundle exec rake db:create --trace"
+        ;;
+      esac
 test:
   override:
     - case $CIRCLE_NODE_INDEX in 0) rvm-exec 2.0.0-p645 bundle exec rspec ;; 1) rvm-exec 2.1.6 bundle exec rspec ;; 2) rvm-exec 2.2.2 bundle exec rspec ;; esac:
