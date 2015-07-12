@@ -27,4 +27,5 @@ test:
       2)
         rvm-exec 2.2.2 bundle exec rspec
         ;;
-      esac
+      esac:
+      parallel: true
