@@ -18,7 +18,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'sqlite3'
 end
