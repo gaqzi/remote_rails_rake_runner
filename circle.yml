@@ -28,7 +28,7 @@ database:
       esac
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) COVERALLS_REPO_TOKEN='' rvm-exec 2.0.0-p645 bundle exec rspec ;; 1) rvm-exec 2.1.6 bundle exec rspec ;; 2) COVERALLS_REPO_TOKEN='' rvm-exec 2.2.2 bundle exec rspec ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) rvm-exec 2.0.0-p645 bundle exec rspec ;; 1) rvm-exec 2.1.6 bundle exec rspec ;; 2) rvm-exec 2.2.2 bundle exec rspec ;; esac:
         parallel: true
 notify:
   webhooks:
