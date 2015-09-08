@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    remote_rails_rake_runner (0.9.3)
+    remote_rails_rake_runner (0.9.4)
       rails
 
 GEM
@@ -42,7 +42,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.0)
+    arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -151,7 +151,7 @@ GEM
     slop (3.6.0)
     sprockets (3.0.3)
       rack (~> 1.0)
-    sprockets-rails (2.3.0)
+    sprockets-rails (2.3.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -182,4 +182,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
