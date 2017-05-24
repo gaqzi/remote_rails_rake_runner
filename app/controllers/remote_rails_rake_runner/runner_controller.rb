@@ -3,7 +3,7 @@ require_dependency 'remote_rails_rake_runner/application_controller'
 module RemoteRailsRakeRunner
   class RunnerController < ApplicationController
     before_filter :load_rake
-    skip_before_action :verify_authenticity_token
+    skip_before_action :verify_authenticity_token rescue ArgumentError
 
     def index
       tasks = Rake.application.tasks.map do |t|
