@@ -2,7 +2,7 @@ require_dependency 'remote_rails_rake_runner/application_controller'
 
 module RemoteRailsRakeRunner
   class RunnerController < ApplicationController
-    before_filter :load_rake
+    before_action :load_rake
     skip_before_action :verify_authenticity_token rescue ArgumentError
 
     def index
@@ -25,7 +25,7 @@ module RemoteRailsRakeRunner
 
       begin
         output = capture_stdout do
-          override_env(params[:environment]) { task.invoke(*(params[:args] || '').split(',')) }
+          override_env(environment_params) { task.invoke(*(params[:args] || '').split(',')) }
         end
       rescue => e
         success = false
@@ -38,6 +38,11 @@ module RemoteRailsRakeRunner
     end
 
     private
+    def environment_params
+      params[:environment].permit! if params[:environment].respond_to?(:permit!)
+      params[:environment]
+    end
+
     def capture_stdout
       previous, $stdout = $stdout, StringIO.new
       yield
